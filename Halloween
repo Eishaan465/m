@@ -49,9 +49,9 @@ void draw() {
 
   if (gameRunning) {
 
-
-
-
+    
+    
+    
 
 
     background(#E8B83F); // Set yelerr background
