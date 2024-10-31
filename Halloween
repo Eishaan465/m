@@ -1,0 +1,102 @@
+PImage photo;
+PImage cops;
+PImage bat;
+PImage dragon;
+PImage bleep;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+
+
+void showMouseCoordinates() {
+  fill(0);
+  text(mouseX + " , " + mouseY, mouseX, mouseY);
+}
+
+
+
+
+int ghostX, ghostY; // Position of the ghost
+int ghostWidth = 50, ghostHeight = 50; // Size of the ghost
+boolean gameRunning = true; // Game state
+int moveDelay = 20;
+int netX;
+int nety;
+int time;
+
+void setup() {
+  size(800, 600); // Set window size
+  ghostX = int(random(width - ghostWidth)); // Initial random position of ghost
+  ghostY = int(random(height - ghostHeight));
+
+
+
+  photo = loadImage("IMAGE.jpg");
+  photo.resize(1000, 700);
+
+  cops = loadImage("cops-removebg-preview.png");
+  cops.resize(100, 70);
+
+  bat = loadImage("batzz.png");
+  bat.resize(100, 70);
+
+  dragon = loadImage("dragon.jpg");
+  dragon.resize(1000, 700);
+}
+
+void draw() {
+
+
+
+  if (gameRunning) {
+
+
+
+
+
+
+    background(#E8B83F); // Set yelerr background
+
+
+    ellipse(mouseX, mouseY, 10, 10);//WHITE CIRCLEE
+    fill(255); // Set ghost color (white)
+    //ellipse(ghostX, ghostY, ghostWidth, ghostHeight); // Draw ghost
+
+
+
+    image(photo, 0, 0);
+    image(cops, mouseX - 20, mouseY  - 12);
+    image(bat, ghostX - 5, ghostY - 3.5);
+
+
+
+
+      // Move the ghost to a new random position every frame
+      if (frameCount % moveDelay == 0)
+      {
+        ghostX = int(random(width - ghostWidth));
+
+        ghostY = int(random(height - ghostHeight));
+
+
+
+
+        ghostX = int(random(width - ghostWidth));
+        ghostY = int(random(height - ghostHeight));
+      }
+    }
+  }
+
+// Detect if the ghost is clicked)
+void mousePressed() {
+  if (gameRunning && mouseX >= ghostX && mouseX <= ghostX + ghostWidth &&
+    mouseY >= ghostY && mouseY <= ghostY + ghostHeight) {
+    gameRunning = false; // Stop the game
+    background(0); // Clear screen
+    fill(255, 0, 0); // Set text color (red)
+    textSize(50);
+    textAlign(CENTER, CENTER);
+    image(dragon, 0, 0);
+    text("You caught the ghost, great job!", width / 2, height / 2); // Display message
+  }
+}
+
